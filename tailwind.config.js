@@ -7,6 +7,10 @@ export default {
         primary: "#FCC822",
         secondary: "#333",
       },
+      fontFamily: {
+        primary: ["Poppins", "sans-serif"],
+        secondary: ["Roboto", "sans-serif"],
+      },
     },
   },
   plugins: [],
