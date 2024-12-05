@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col gap-y-2">
     <!-- mobile start -->
     <nav class="md:hidden flex items-center justify-between gap-x-16 py-2">
       <img
@@ -7,7 +7,11 @@
         alt="logo"
         class="flex-1 object-contain object-center"
       />
-      <Button class="flex-1">Login</Button>
+      <Button
+        @click="loginHandler"
+        class="flex-1"
+        >Login</Button
+      >
     </nav>
     <!-- mobile end -->
     <!-- tablet start -->
@@ -17,7 +21,11 @@
         alt="logo"
         class="object-contain object-center w-64"
       />
-      <Button class="w-[15%]">Login</Button>
+      <Button
+        @click="loginHandler"
+        class="w-[15%]"
+        >Login</Button
+      >
     </nav>
     <!-- tablet end -->
     <!-- desktop start -->
@@ -27,7 +35,11 @@
         alt="logo"
         class="object-contain object-center w-64"
       />
-      <Button class="w-fit">Login</Button>
+      <Button
+        @click="loginHandler"
+        class="w-fit"
+        >Login</Button
+      >
     </nav>
     <!-- desktop end -->
     <slot></slot>
@@ -35,6 +47,12 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import Button from "./Button.vue";
+
+const router = useRouter();
+
+const loginHandler = () => {
+  router.push("/login");
+};
 </script>

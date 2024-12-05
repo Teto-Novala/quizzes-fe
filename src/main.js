@@ -1,6 +1,10 @@
 import "./assets/main.css";
+
 import "@fontsource/poppins";
+import "@fontsource/poppins/500.css";
+
 import "@fontsource/roboto";
+import "@fontsource/roboto/500.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
