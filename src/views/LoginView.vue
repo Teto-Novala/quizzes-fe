@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="px-8">
     <!-- mobile start -->
     <section class="md:hidden flex flex-col gap-y-10">
       <img
@@ -221,7 +221,13 @@ const submitHandler = async () => {
       userStore.data = response.data;
       toast.success("Berhasil login", {
         onClose: () => {
-          router.push("/");
+          if (userStore.data.user.role === "tutor") {
+            router.push("/tutor/dashboard");
+          } else if (userStore.data.user.role === "user") {
+            router.push("/");
+          } else {
+            router.push("/");
+          }
         },
       });
     } catch (error) {

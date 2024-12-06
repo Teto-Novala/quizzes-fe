@@ -1,7 +1,14 @@
 <template>
-  <div class="px-8">
+  <div>
     <Navbar v-if="showNav">
-      <RouterView />
+      <div
+        v-if="sideBar"
+        class="flex"
+      >
+        <SideBar class="hidden md:flex" />
+        <RouterView />
+      </div>
+      <RouterView v-else />
     </Navbar>
     <RouterView v-else />
   </div>
@@ -11,6 +18,9 @@
 import Navbar from "./Navbar.vue";
 import { RouterView, useRoute } from "vue-router";
 import { computed } from "vue";
+import SideBar from "./SideBar.vue";
+
+const sideBar = computed(() => route.meta.requiresSideBar);
 
 const route = useRoute();
 const showNav = computed(() => route.meta.requiresNav);

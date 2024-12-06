@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="px-8">
     <!-- mobile start -->
     <section class="md:hidden flex flex-col gap-y-10">
       <img
