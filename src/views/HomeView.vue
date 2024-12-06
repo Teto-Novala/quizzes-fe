@@ -19,9 +19,9 @@
     <!-- mobile end -->
     <!-- tablet start -->
     <section
-      class="hidden xl:hidden md:flex items-center justify-between gap-x-10"
+      class="hidden xl:hidden md:flex items-center justify-center gap-x-5"
     >
-      <div class="font-secondary flex flex-col gap-y-4 w-[50%]">
+      <div class="font-secondary flex flex-col gap-y-4 w-[40%]">
         <h1 class="font-medium text-2xl">
           Belajar Konsep Baru Disetiap Pertanyaan
         </h1>
@@ -33,7 +33,7 @@
       <img
         src="/src/assets/images/home/hero.svg"
         alt="hero"
-        class="object-cover object-center w-[50%]"
+        class="w-[50%] scale-125"
       />
     </section>
     <!-- tablet end -->

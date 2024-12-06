@@ -39,9 +39,9 @@
             v-model="formData.password"
           />
         </div>
-        <div class="flex items-center justify-between gap-x-5">
-          <Button>Login</Button>
-          <Button>Register</Button>
+        <div class="flex items-center justify-center gap-x-5">
+          <Button class="w-full">Login</Button>
+          <Button class="w-full">Register</Button>
         </div>
       </form>
     </section>
@@ -87,9 +87,9 @@
             v-model="formData.password"
           />
         </div>
-        <div class="flex items-center justify-between gap-x-5">
-          <Button>Login</Button>
-          <Button>Register</Button>
+        <div class="flex items-center justify-center gap-x-5">
+          <Button class="w-full">Login</Button>
+          <Button class="w-full">Register</Button>
         </div>
       </form>
     </section>
@@ -136,9 +136,9 @@
               v-model="formData.password"
             />
           </div>
-          <div class="flex items-center justify-between gap-x-5">
-            <Button>Login</Button>
-            <Button>Register</Button>
+          <div class="flex items-center justify-center gap-x-5">
+            <Button class="w-full">Login</Button>
+            <Button class="w-full">Register</Button>
           </div>
         </form>
       </div>
@@ -155,12 +155,17 @@
 <script setup>
 import Button from "@/components/Button.vue";
 import Input from "@/components/Input.vue";
+import { useUserStore } from "@/stores/user";
 import useVuelidate from "@vuelidate/core";
 import { email, helpers, required } from "@vuelidate/validators";
+import axios from "axios";
 import { computed, reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
+const userStore = useUserStore();
+const router = useRouter();
 
 const formData = reactive({
   email: "",
@@ -184,6 +189,20 @@ const v$ = useVuelidate(rules, formData);
 const submitHandler = async () => {
   const result = await v$.value.$validate();
   if (result) {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData
+      );
+      userStore.data = response.data;
+      toast.success("Berhasil login", {
+        onClose: () => {
+          router.push("/");
+        },
+      });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   } else {
     toast.error(v$.value.$errors[0].$message);
   }
