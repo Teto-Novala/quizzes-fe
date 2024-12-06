@@ -40,8 +40,16 @@
           />
         </div>
         <div class="flex items-center justify-center gap-x-5">
-          <Button class="w-full">Login</Button>
-          <Button class="w-full">Register</Button>
+          <Button
+            type="submit"
+            class="w-full"
+            >Login</Button
+          >
+          <Button
+            @click="registerHandler"
+            class="w-full"
+            >Register</Button
+          >
         </div>
       </form>
     </section>
@@ -88,8 +96,16 @@
           />
         </div>
         <div class="flex items-center justify-center gap-x-5">
-          <Button class="w-full">Login</Button>
-          <Button class="w-full">Register</Button>
+          <Button
+            type="submit"
+            class="w-full"
+            >Login</Button
+          >
+          <Button
+            @click="registerHandler"
+            class="w-full"
+            >Register</Button
+          >
         </div>
       </form>
     </section>
@@ -137,8 +153,16 @@
             />
           </div>
           <div class="flex items-center justify-center gap-x-5">
-            <Button class="w-full">Login</Button>
-            <Button class="w-full">Register</Button>
+            <Button
+              type="submit"
+              class="w-full"
+              >Login</Button
+            >
+            <Button
+              @click="registerHandler"
+              class="w-full"
+              >Register</Button
+            >
           </div>
         </form>
       </div>
@@ -206,5 +230,9 @@ const submitHandler = async () => {
   } else {
     toast.error(v$.value.$errors[0].$message);
   }
+};
+
+const registerHandler = () => {
+  router.push("/register");
 };
 </script>
