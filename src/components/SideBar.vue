@@ -18,22 +18,22 @@
         class="flex flex-col"
       >
         <RouterLink
-          to="/tutor/lihat-model"
+          to="/tutor/model"
           class="hover:bg-white w-full text-center py-2"
           >Lihat Model</RouterLink
         >
         <RouterLink
-          to="/tutor/buat-model"
+          to="/tutor/model/create"
           class="hover:bg-white w-full text-center py-2"
           >Buat Model</RouterLink
         >
         <RouterLink
-          to="/tutor/edit-model"
+          to="/tutor/model/edit"
           class="hover:bg-white w-full text-center py-2"
           >Edit Model</RouterLink
         >
         <RouterLink
-          to="/tutor/hapus-model"
+          to="/tutor/model/delete"
           class="hover:bg-white w-full text-center py-2"
           >hapus Model</RouterLink
         >
@@ -104,22 +104,22 @@
         class="flex flex-col w-full"
       >
         <RouterLink
-          to="/tutor/lihat-model"
+          to="/tutor/model"
           class="hover:bg-white w-full text-center py-2"
           >Lihat Model</RouterLink
         >
         <RouterLink
-          to="/tutor/buat-model"
+          to="/tutor/model/create"
           class="hover:bg-white w-full text-center py-2"
           >Buat Model</RouterLink
         >
         <RouterLink
-          to="/tutor/edit-model"
+          to="/tutor/model/edit"
           class="hover:bg-white w-full text-center py-2"
           >Edit Model</RouterLink
         >
         <RouterLink
-          to="/tutor/hapus-model"
+          to="/tutor/model/delete"
           class="hover:bg-white w-full text-center py-2"
           >hapus Model</RouterLink
         >

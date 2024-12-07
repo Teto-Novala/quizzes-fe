@@ -60,23 +60,27 @@
           class="flex flex-col gap-y-4 w-full"
         >
           <RouterLink
-            to="/tutor/lihat-model"
+            to="/tutor/model"
             class="hover:bg-white w-full text-center py-1"
+            @click="itemModelHandler"
             >Lihat Model</RouterLink
           >
           <RouterLink
-            to="/tutor/buat-model"
+            to="/tutor/model/create"
             class="hover:bg-white w-full text-center py-1"
+            @click="itemModelHandler"
             >Buat Model</RouterLink
           >
           <RouterLink
-            to="/tutor/edit-model"
+            to="/tutor/model/edit"
             class="hover:bg-white w-full text-center py-1"
+            @click="itemModelHandler"
             >Edit Model</RouterLink
           >
           <RouterLink
-            to="/tutor/hapus-model"
+            to="/tutor/model/delete"
             class="hover:bg-white w-full text-center py-1"
+            @click="itemModelHandler"
             >hapus Model</RouterLink
           >
         </div>
@@ -327,6 +331,11 @@ const soalHandler = () => {
 };
 const modelHandler = () => {
   isModelShow.value = !isModelShow.value;
+};
+
+const itemModelHandler = () => {
+  modelHandler();
+  showHandler();
 };
 
 const isTutor = computed(() => userStore.data.user.role === "tutor");
