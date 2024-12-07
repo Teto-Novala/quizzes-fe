@@ -3,10 +3,10 @@
     <Navbar v-if="showNav">
       <div
         v-if="sideBar"
-        class="flex"
+        class="md:flex"
       >
         <SideBar class="hidden md:flex" />
-        <RouterView />
+        <RouterView class="md:w-full" />
       </div>
       <RouterView v-else />
     </Navbar>

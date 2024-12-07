@@ -3,6 +3,8 @@ import HomeView from "../views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import DashboardView from "@/views/tutor/DashboardView.vue";
+import ProfilView from "@/views/tutor/profil/ProfilView.vue";
+import EditProfilView from "@/views/tutor/profil/edit/EditProfilView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +31,18 @@ const router = createRouter({
       path: "/tutor/dashboard",
       name: "tutor-dashboard",
       component: DashboardView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/profil",
+      name: "tutor-profil",
+      component: ProfilView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/profil/edit",
+      name: "tutor-profil-edit",
+      component: EditProfilView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
   ],

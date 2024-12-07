@@ -236,7 +236,7 @@
         <div v-if="isTutor">
           <div
             @click="logOutHandler"
-            class="hover:text-secondary transition-all hover:underline"
+            class="hover:text-secondary transition-all hover:underline cursor-pointer"
           >
             Logout
           </div>
