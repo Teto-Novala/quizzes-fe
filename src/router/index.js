@@ -27,6 +27,7 @@ import SubjectView from "@/views/admin/subject/read/SubjectView.vue";
 import UserView from "@/views/admin/user/read/UserView.vue";
 import UpdateUserView from "@/views/admin/user/update/UpdateUserView.vue";
 import IdSubjectView from "@/views/admin/subject/update/id/IdSubjectView.vue";
+import IdUpdateUserView from "@/views/admin/user/update/id/IdUpdateUserView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -197,6 +198,12 @@ const router = createRouter({
       path: "/admin/user/edit",
       name: "admin-user-edit",
       component: UpdateUserView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/user/edit/:idUser",
+      name: "admin-user-edit-idUser",
+      component: IdUpdateUserView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
     {
