@@ -101,22 +101,26 @@
           class="flex flex-col gap-y-4 w-full"
         >
           <RouterLink
-            to="/tutor/lihat-soal"
+            @click="itemSoalHandler"
+            to="/tutor/soal"
             class="hover:bg-white w-full text-center py-1"
             >Lihat Soal</RouterLink
           >
           <RouterLink
-            to="/tutor/buat-soal"
+            @click="itemSoalHandler"
+            to="/tutor/soal/create"
             class="hover:bg-white w-full text-center py-1"
             >Buat Soal</RouterLink
           >
           <RouterLink
-            to="/tutor/edit-soal"
+            @click="itemSoalHandler"
+            to="/tutor/soal/edit"
             class="hover:bg-white w-full text-center py-1"
             >Edit Soal</RouterLink
           >
           <RouterLink
-            to="/tutor/hapus-soal"
+            @click="itemSoalHandler"
+            to="/tutor/soal/delete"
             class="hover:bg-white w-full text-center py-1"
             >hapus Soal</RouterLink
           >
@@ -335,6 +339,11 @@ const modelHandler = () => {
 
 const itemModelHandler = () => {
   modelHandler();
+  showHandler();
+};
+
+const itemSoalHandler = () => {
+  soalHandler();
   showHandler();
 };
 

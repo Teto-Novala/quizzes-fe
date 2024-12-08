@@ -10,6 +10,9 @@ import CreateModelView from "@/views/tutor/model/create/CreateModelView.vue";
 import EditModelView from "@/views/tutor/model/edit/EditModelView.vue";
 import IdEditModelView from "@/views/tutor/model/edit/id/IdEditModelView.vue";
 import DeleteModelView from "@/views/tutor/model/delete/DeleteModelView.vue";
+import SoalView from "@/views/tutor/soal/SoalView.vue";
+import SoalModelView from "@/views/tutor/soal/model/SoalModelView.vue";
+import CreateSoalView from "@/views/tutor/soal/create/CreateSoalView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +81,24 @@ const router = createRouter({
       path: "/tutor/model/delete",
       name: "tutor-model-delete",
       component: DeleteModelView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal",
+      name: "tutor-soal",
+      component: SoalView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/:idModel",
+      name: "tutor-soal-idModel",
+      component: SoalModelView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/create",
+      name: "tutor-soal-create",
+      component: CreateSoalView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
   ],

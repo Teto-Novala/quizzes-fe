@@ -54,22 +54,22 @@
         class="flex flex-col"
       >
         <RouterLink
-          to="/tutor/lihat-soal"
+          to="/tutor/soal"
           class="hover:bg-white w-full text-center py-1"
           >Lihat Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/buat-soal"
+          to="/tutor/soal/create"
           class="hover:bg-white w-full text-center py-1"
           >Buat Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/edit-soal"
+          to="/tutor/soal/edit"
           class="hover:bg-white w-full text-center py-1"
           >Edit Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/hapus-soal"
+          to="/tutor/soal/delete"
           class="hover:bg-white w-full text-center py-1"
           >hapus Soal</RouterLink
         >
@@ -140,22 +140,22 @@
         class="flex flex-col"
       >
         <RouterLink
-          to="/tutor/lihat-soal"
+          to="/tutor/soal"
           class="hover:bg-white w-full text-center py-2"
           >Lihat Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/buat-soal"
+          to="/tutor/soal/create"
           class="hover:bg-white w-full text-center py-2"
           >Buat Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/edit-soal"
+          to="/tutor/soal/edit"
           class="hover:bg-white w-full text-center py-2"
           >Edit Soal</RouterLink
         >
         <RouterLink
-          to="/tutor/hapus-soal"
+          to="/tutor/soal/delete"
           class="hover:bg-white w-full text-center py-2"
           >hapus Soal</RouterLink
         >
