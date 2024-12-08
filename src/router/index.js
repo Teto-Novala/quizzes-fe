@@ -13,6 +13,12 @@ import DeleteModelView from "@/views/tutor/model/delete/DeleteModelView.vue";
 import SoalView from "@/views/tutor/soal/SoalView.vue";
 import SoalModelView from "@/views/tutor/soal/model/SoalModelView.vue";
 import CreateSoalView from "@/views/tutor/soal/create/CreateSoalView.vue";
+import IdSoalView from "@/views/tutor/soal/model/id/IdSoalView.vue";
+import EditSoalView from "@/views/tutor/soal/edit/EditSoalView.vue";
+import EditSoalModelView from "@/views/tutor/soal/edit/model/EditSoalModelView.vue";
+import IdEditSoalView from "@/views/tutor/soal/edit/id/IdEditSoalView.vue";
+import DeleteSoalView from "@/views/tutor/soal/delete/DeleteSoalView.vue";
+import DeleteSoalModelView from "@/views/tutor/soal/delete/model/DeleteSoalModelView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -90,15 +96,51 @@ const router = createRouter({
       meta: { requiresNav: true, requiresSideBar: true },
     },
     {
-      path: "/tutor/soal/:idModel",
+      path: "/tutor/soal/:namaModel/:idModel",
       name: "tutor-soal-idModel",
       component: SoalModelView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/:namaModel/:idModel/:noSoal/:idSoal",
+      name: "tutor-soal-idModel-idSoal",
+      component: IdSoalView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
     {
       path: "/tutor/soal/create",
       name: "tutor-soal-create",
       component: CreateSoalView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/edit",
+      name: "tutor-soal-edit",
+      component: EditSoalView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/edit/:namaModel/:idModel",
+      name: "tutor-soal-edit-namaModel-idModel",
+      component: EditSoalModelView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/edit/:namaModel/:idModel/:noSoal/:idSoal",
+      name: "tutor-soal-edit-namaModel-idModel-noSoal-idSoal",
+      component: IdEditSoalView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/delete",
+      name: "tutor-soal-delete",
+      component: DeleteSoalView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/soal/delete/:namaModel/:idModel",
+      name: "tutor-soal-delete-namaModel-idModel",
+      component: DeleteSoalModelView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
   ],

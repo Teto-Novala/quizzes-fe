@@ -1,57 +1,27 @@
 <template>
   <main class="min-h-screen font-primary pt-3 bg-slate-50">
     <div
-      v-if="models === null"
+      v-if="soal === null"
       class="flex justify-center"
     >
       <p>Something went wrong!</p>
     </div>
+    <div
+      v-else-if="soal.length === 0"
+      class="flex justify-center"
+    >
+      <p>Soal kosong!</p>
+    </div>
     <div v-else>
       <!-- mobile start -->
-      <section class="md:hidden flex flex-col items-center gap-y-4 px-8 pb-8">
-        <h1 class="font-secondary font-medium text-2xl">Buat Soal</h1>
+      <section class="md:hidden flex flex-col gap-y-4 items-center px-8 pb-10">
+        <h1 class="font-secondary font-medium text-2xl">
+          Edit Soal {{ route.params.noSoal }}
+        </h1>
         <form
           @submit.prevent="submitHandler"
-          class="w-full flex flex-col gap-y-5"
+          class="w-full flex flex-col gap-y-3"
         >
-          <div class="flex flex-col gap-y-1">
-            <label
-              for="model"
-              class="text-lg"
-              >Model</label
-            >
-            <div
-              v-if="models.length === 0"
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-              >
-                <option value="">Model Kosong</option>
-              </select>
-            </div>
-            <div
-              v-else
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-                v-model="formData.model"
-              >
-                <option
-                  v-for="(item, index) in models"
-                  :key="index"
-                  :value="item.id"
-                >
-                  {{ item.namaModel }}
-                </option>
-              </select>
-            </div>
-          </div>
           <div class="flex flex-col gap-y-1">
             <label
               for="subject"
@@ -60,9 +30,9 @@
             >
             <Input
               type="text"
-              id="subject"
               disabled
-              v-model:model="formData.subject"
+              id="subject"
+              v-model:model="updateForm.subject"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -72,11 +42,12 @@
               >Soal</label
             >
             <textarea
-              class="outline-none p-3"
-              rows="5"
+              class="p-2 rounded-lg font-medium border border-primary"
               name="soal"
               id="soal"
-              v-model="formData.soal"
+              cols="30"
+              rows="6"
+              v-model="updateForm.soal"
             ></textarea>
           </div>
           <div class="flex flex-col gap-y-1">
@@ -88,7 +59,7 @@
             <Input
               type="text"
               id="pilihanA"
-              v-model:model="formData.pilihanA"
+              v-model:model="updateForm.pilihanA"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -100,7 +71,7 @@
             <Input
               type="text"
               id="pilihanB"
-              v-model:model="formData.pilihanB"
+              v-model:model="updateForm.pilihanB"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -112,7 +83,7 @@
             <Input
               type="text"
               id="pilihanC"
-              v-model:model="formData.pilihanC"
+              v-model:model="updateForm.pilihanC"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -124,7 +95,7 @@
             <Input
               type="text"
               id="pilihanD"
-              v-model:model="formData.pilihanD"
+              v-model:model="updateForm.pilihanD"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -136,8 +107,8 @@
             <select
               name="jawaban"
               id="jawaban"
-              class="text-base px-3 py-2 w-full"
-              v-model="formData.jawaban"
+              class="p-2 border border-primary"
+              v-model="updateForm.jawaban"
             >
               <option value="a">A</option>
               <option value="b">B</option>
@@ -145,61 +116,21 @@
               <option value="d">D</option>
             </select>
           </div>
-          <Button
-            type="submit"
-            class="w-full"
-            >Buat</Button
-          >
+          <Button type="submit">Edit</Button>
         </form>
       </section>
       <!-- mobile end -->
       <!-- tablet start -->
       <section
-        class="hidden xl:hidden md:flex flex-col items-center gap-y-4 px-8 pb-8"
+        class="hidden xl:hidden md:flex flex-col gap-y-4 items-center px-8 pb-10"
       >
-        <h1 class="font-secondary font-medium text-2xl">Buat Soal</h1>
+        <h1 class="font-secondary font-medium text-2xl">
+          Edit Soal {{ route.params.noSoal }}
+        </h1>
         <form
           @submit.prevent="submitHandler"
-          class="w-full flex flex-col gap-y-5"
+          class="w-full flex flex-col gap-y-3"
         >
-          <div class="flex flex-col gap-y-1">
-            <label
-              for="model"
-              class="text-lg"
-              >Model</label
-            >
-            <div
-              v-if="models.length === 0"
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-              >
-                <option value="">Model Kosong</option>
-              </select>
-            </div>
-            <div
-              v-else
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-                v-model="formData.model"
-              >
-                <option
-                  v-for="(item, index) in models"
-                  :key="index"
-                  :value="item.id"
-                >
-                  {{ item.namaModel }}
-                </option>
-              </select>
-            </div>
-          </div>
           <div class="flex flex-col gap-y-1">
             <label
               for="subject"
@@ -208,9 +139,9 @@
             >
             <Input
               type="text"
-              id="subject"
               disabled
-              v-model:model="formData.subject"
+              id="subject"
+              v-model:model="updateForm.subject"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -220,11 +151,12 @@
               >Soal</label
             >
             <textarea
-              class="outline-none p-3"
-              rows="5"
+              class="p-2 rounded-lg font-medium border border-primary"
               name="soal"
               id="soal"
-              v-model="formData.soal"
+              cols="30"
+              rows="6"
+              v-model="updateForm.soal"
             ></textarea>
           </div>
           <div class="flex flex-col gap-y-1">
@@ -236,7 +168,7 @@
             <Input
               type="text"
               id="pilihanA"
-              v-model:model="formData.pilihanA"
+              v-model:model="updateForm.pilihanA"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -248,7 +180,7 @@
             <Input
               type="text"
               id="pilihanB"
-              v-model:model="formData.pilihanB"
+              v-model:model="updateForm.pilihanB"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -260,7 +192,7 @@
             <Input
               type="text"
               id="pilihanC"
-              v-model:model="formData.pilihanC"
+              v-model:model="updateForm.pilihanC"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -272,7 +204,7 @@
             <Input
               type="text"
               id="pilihanD"
-              v-model:model="formData.pilihanD"
+              v-model:model="updateForm.pilihanD"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -284,8 +216,8 @@
             <select
               name="jawaban"
               id="jawaban"
-              class="text-base px-3 py-2 w-full"
-              v-model="formData.jawaban"
+              class="p-2 border border-primary"
+              v-model="updateForm.jawaban"
             >
               <option value="a">A</option>
               <option value="b">B</option>
@@ -293,59 +225,19 @@
               <option value="d">D</option>
             </select>
           </div>
-          <Button
-            type="submit"
-            class="w-full"
-            >Buat</Button
-          >
+          <Button type="submit">Edit</Button>
         </form>
       </section>
       <!-- tablet end -->
       <!-- desktop start -->
-      <section class="hidden xl:flex flex-col items-center gap-y-4 px-8 pb-8">
-        <h1 class="font-secondary font-medium text-2xl">Buat Soal</h1>
+      <section class="hidden xl:flex flex-col gap-y-4 items-center px-8 pb-10">
+        <h1 class="font-secondary font-medium text-2xl">
+          Edit Soal {{ route.params.noSoal }}
+        </h1>
         <form
           @submit.prevent="submitHandler"
-          class="w-full flex flex-col gap-y-5"
+          class="w-full flex flex-col gap-y-3"
         >
-          <div class="flex flex-col gap-y-1">
-            <label
-              for="model"
-              class="text-lg"
-              >Model</label
-            >
-            <div
-              v-if="models.length === 0"
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-              >
-                <option value="">Model Kosong</option>
-              </select>
-            </div>
-            <div
-              v-else
-              class="w-full"
-            >
-              <select
-                name="model"
-                id="model"
-                class="text-base px-3 py-2 w-full"
-                v-model="formData.model"
-              >
-                <option
-                  v-for="(item, index) in models"
-                  :key="index"
-                  :value="item.id"
-                >
-                  {{ item.namaModel }}
-                </option>
-              </select>
-            </div>
-          </div>
           <div class="flex flex-col gap-y-1">
             <label
               for="subject"
@@ -354,9 +246,9 @@
             >
             <Input
               type="text"
-              id="subject"
               disabled
-              v-model:model="formData.subject"
+              id="subject"
+              v-model:model="updateForm.subject"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -366,11 +258,12 @@
               >Soal</label
             >
             <textarea
-              class="outline-none p-3"
-              rows="5"
+              class="p-2 rounded-lg font-medium border border-primary"
               name="soal"
               id="soal"
-              v-model="formData.soal"
+              cols="30"
+              rows="6"
+              v-model="updateForm.soal"
             ></textarea>
           </div>
           <div class="flex flex-col gap-y-1">
@@ -382,7 +275,7 @@
             <Input
               type="text"
               id="pilihanA"
-              v-model:model="formData.pilihanA"
+              v-model:model="updateForm.pilihanA"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -394,7 +287,7 @@
             <Input
               type="text"
               id="pilihanB"
-              v-model:model="formData.pilihanB"
+              v-model:model="updateForm.pilihanB"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -406,7 +299,7 @@
             <Input
               type="text"
               id="pilihanC"
-              v-model:model="formData.pilihanC"
+              v-model:model="updateForm.pilihanC"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -418,7 +311,7 @@
             <Input
               type="text"
               id="pilihanD"
-              v-model:model="formData.pilihanD"
+              v-model:model="updateForm.pilihanD"
             />
           </div>
           <div class="flex flex-col gap-y-1">
@@ -430,8 +323,8 @@
             <select
               name="jawaban"
               id="jawaban"
-              class="text-base px-3 py-2 w-full"
-              v-model="formData.jawaban"
+              class="p-2 border border-primary"
+              v-model="updateForm.jawaban"
             >
               <option value="a">A</option>
               <option value="b">B</option>
@@ -439,11 +332,7 @@
               <option value="d">D</option>
             </select>
           </div>
-          <Button
-            type="submit"
-            class="w-full"
-            >Buat</Button
-          >
+          <Button type="submit">Edit</Button>
         </form>
       </section>
       <!-- desktop end -->
@@ -459,12 +348,13 @@ import useVuelidate from "@vuelidate/core";
 import { helpers, required } from "@vuelidate/validators";
 import axios from "axios";
 import { computed, onBeforeMount, onMounted, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 const userStore = useUserStore();
-const toast = useToast();
 const router = useRouter();
+const toast = useToast();
+const route = useRoute();
 
 onBeforeMount(() => {
   if (!Object.keys(userStore.data).length) {
@@ -476,31 +366,49 @@ onBeforeMount(() => {
   }
 });
 
-const models = ref(null);
+const soal = ref(null);
 
 const fetchAPI = async () => {
   try {
     const response = await axios.get(
-      `http://localhost:5000/api/soal-model/${userStore.data.user.id}`,
+      `http://localhost:5000/api/soal/${route.params.idSoal}`,
       {
         headers: {
           Authorization: `Bearer ${userStore.data.token}`,
         },
       }
     );
-    models.value = response.data;
+    soal.value = response.data;
   } catch (error) {
+    if (error.response.data.message === "Unauthorized") {
+      toast.error(error.response.data.message, {
+        onClose: () => {
+          userStore.reset();
+          router.push("/login");
+        },
+      });
+      return;
+    }
     toast.error(error.response.data.message);
   }
 };
 
-onMounted(() => {
-  fetchAPI();
+onMounted(async () => {
+  await fetchAPI().then(() => {
+    updateForm.id = soal.value.id;
+    updateForm.subject = soal.value.subject;
+    updateForm.soal = soal.value.soal;
+    updateForm.pilihanA = soal.value.pilihanA;
+    updateForm.pilihanB = soal.value.pilihanB;
+    updateForm.pilihanC = soal.value.pilihanC;
+    updateForm.pilihanD = soal.value.pilihanD;
+    updateForm.jawaban = soal.value.jawaban;
+  });
 });
 
-const formData = reactive({
-  model: "",
-  subject: userStore.data ? userStore.data.user.subject : "",
+const updateForm = reactive({
+  id: "",
+  subject: "",
   soal: "",
   pilihanA: "",
   pilihanB: "",
@@ -511,12 +419,6 @@ const formData = reactive({
 
 const rules = computed(() => {
   return {
-    model: {
-      required: helpers.withMessage("Model tidak boleh kosong", required),
-    },
-    subject: {
-      required: helpers.withMessage("Subject tidak boleh kosong", required),
-    },
     soal: {
       required: helpers.withMessage("Soal tidak boleh kosong", required),
     },
@@ -527,10 +429,10 @@ const rules = computed(() => {
       required: helpers.withMessage("Pilihan B tidak boleh kosong", required),
     },
     pilihanC: {
-      required: helpers.withMessage("Pilihan D tidak boleh kosong", required),
+      required: helpers.withMessage("Pilihan C tidak boleh kosong", required),
     },
     pilihanD: {
-      required: helpers.withMessage("Pilihan E tidak boleh kosong", required),
+      required: helpers.withMessage("Pilihan D tidak boleh kosong", required),
     },
     jawaban: {
       required: helpers.withMessage("Jawaban tidak boleh kosong", required),
@@ -538,26 +440,38 @@ const rules = computed(() => {
   };
 });
 
-const v$ = useVuelidate(rules, formData);
+const v$ = useVuelidate(rules, updateForm);
 
 const submitHandler = async () => {
+  if (
+    updateForm.jawaban === soal.value.jawaban &&
+    updateForm.pilihanA === soal.value.pilihanA &&
+    updateForm.pilihanB === soal.value.pilihanB &&
+    updateForm.pilihanC === soal.value.pilihanC &&
+    updateForm.pilihanD === soal.value.pilihanD &&
+    updateForm.soal === soal.value.soal
+  ) {
+    return;
+  }
+
   const result = await v$.value.$validate();
+  console.log(result);
   if (result) {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/soal/create",
-        formData,
-        { headers: { Authorization: `Bearer ${userStore.data.token}` } }
+      const response = await axios.put(
+        "http://localhost:5000/api/soal/update",
+        updateForm,
+        {
+          headers: {
+            Authorization: `Bearer ${userStore.data.token}`,
+          },
+        }
       );
-      toast.success("Berhasil membuat soal");
-      formData.jawaban = "";
-      formData.model = "";
-      formData.pilihanA = "";
-      formData.pilihanB = "";
-      formData.pilihanC = "";
-      formData.pilihanD = "";
-      formData.soal = "";
-      formData.subject = userStore.data ? userStore.data.user.subject : "";
+      toast.success("Berhasil mengupdate", {
+        onClose: () => {
+          location.reload();
+        },
+      });
     } catch (error) {
       if (error.response.data.message === "Unauthorized") {
         toast.error(error.response.data.message, {

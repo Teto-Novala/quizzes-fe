@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-50 min-h-screen pt-3 font-primary">
+  <main class="min-h-screen pt-3 font-primary bg-slate-50">
     <div
       v-if="soal === null"
       class="flex justify-center"
@@ -16,14 +16,12 @@
       <!-- mobile start -->
       <section class="md:hidden flex flex-col gap-y-4 px-8">
         <h1 class="font-secondary font-medium text-2xl text-center">
-          {{ route.params.namaModel }}
+          Delete {{ route.params.namaModel }}
         </h1>
-        <RouterLink
+        <div
           v-for="(item, index) in soal"
           :key="index"
-          :to="`/tutor/soal/${route.params.namaModel}/${route.params.idModel}/${
-            index + 1
-          }/${item.id}`"
+          @click="itemHandler(item.id)"
           class="flex flex-col gap-y-2 bg-primary p-2 rounded-md cursor-pointer border border-primary box-border transition-all group hover:bg-white hover:text-primary"
         >
           <p class="text-lg">Soal {{ index + 1 }}</p>
@@ -32,23 +30,19 @@
           >
             {{ item.soal }}
           </p>
-        </RouterLink>
+        </div>
       </section>
       <!-- mobile end -->
       <!-- tablet start -->
-      <section
-        class="hidden xl:hidden md:flex flex-col items-center w-full gap-y-6 px-8"
-      >
+      <section class="hidden xl:hidden md:flex flex-col gap-y-4 px-8">
         <h1 class="font-secondary font-medium text-2xl text-center">
-          {{ route.params.namaModel }}
+          Delete {{ route.params.namaModel }}
         </h1>
-        <RouterLink
+        <div
           v-for="(item, index) in soal"
           :key="index"
-          :to="`/tutor/soal/${route.params.namaModel}/${route.params.idModel}/${
-            index + 1
-          }/${item.id}`"
-          class="flex flex-col gap-y-2 bg-primary p-2 rounded-md cursor-pointer border border-primary box-border transition-all group hover:bg-white hover:text-primary w-3/4"
+          @click="itemHandler(item.id)"
+          class="flex flex-col gap-y-2 bg-primary p-2 rounded-md cursor-pointer border border-primary box-border transition-all group hover:bg-white hover:text-primary"
         >
           <p class="text-lg">Soal {{ index + 1 }}</p>
           <p
@@ -56,21 +50,19 @@
           >
             {{ item.soal }}
           </p>
-        </RouterLink>
+        </div>
       </section>
-      <!-- tablet start -->
+      <!-- tablet end -->
       <!-- desktop start -->
-      <section class="hidden xl:flex flex-col items-center w-full gap-y-6 px-8">
+      <section class="hidden xl:flex flex-col gap-y-4 px-8">
         <h1 class="font-secondary font-medium text-2xl text-center">
-          {{ route.params.namaModel }}
+          Delete {{ route.params.namaModel }}
         </h1>
-        <RouterLink
+        <div
           v-for="(item, index) in soal"
+          @click="itemHandler(item.id)"
           :key="index"
-          :to="`/tutor/soal/${route.params.namaModel}/${route.params.idModel}/${
-            index + 1
-          }/${item.id}`"
-          class="flex flex-col gap-y-2 bg-primary p-2 rounded-md cursor-pointer border border-primary box-border transition-all group hover:bg-white hover:text-primary w-3/4"
+          class="flex flex-col gap-y-2 bg-primary p-2 rounded-md cursor-pointer border border-primary box-border transition-all group hover:bg-white hover:text-primary"
         >
           <p class="text-lg">Soal {{ index + 1 }}</p>
           <p
@@ -78,14 +70,35 @@
           >
             {{ item.soal }}
           </p>
-        </RouterLink>
+        </div>
       </section>
       <!-- desktop end -->
+      <div
+        v-if="isShow"
+        class="fixed bg-black/50 top-0 left-0 right-0 bottom-0 flex justify-center items-center px-8"
+      >
+        <div class="bg-white p-5 rounded-lg flex flex-col gap-y-3">
+          <p class="text-lg">Hapus soal ini?</p>
+          <div class="flex items-center justify-center gap-x-4">
+            <Button
+              @click="kembaliHandler"
+              class="w-full"
+              >Kembali</Button
+            >
+            <Button
+              @click="hapusHandler"
+              class="w-full"
+              >Hapus</Button
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
 
 <script setup>
+import Button from "@/components/Button.vue";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
 import { onBeforeMount, onMounted, ref } from "vue";
@@ -120,7 +133,6 @@ const fetchAPI = async () => {
       }
     );
     soal.value = response.data;
-    console.log(soal.value);
   } catch (error) {
     if (error.response.data.message === "Unauthorized") {
       toast.error(error.response.data.message, {
@@ -138,4 +150,39 @@ const fetchAPI = async () => {
 onMounted(() => {
   fetchAPI();
 });
+
+const isShow = ref(false);
+const itemId = ref("");
+
+const kembaliHandler = () => {
+  itemId.value = "";
+  isShow.value = false;
+};
+
+const itemHandler = (id) => {
+  itemId.value = id;
+  isShow.value = true;
+};
+
+const hapusHandler = async () => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:5000/api/soal/delete/${itemId.value}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userStore.data.token}`,
+        },
+      }
+    );
+
+    toast.success(response.data.message, {
+      onClose: () => {
+        isShow.value = false;
+        location.reload();
+      },
+    });
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+};
 </script>

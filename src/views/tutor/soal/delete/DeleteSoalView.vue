@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-50 min-h-screen pt-3 font-primary">
+  <main class="bg-slate-50 font-primary min-h-screen pt-3">
     <div
       v-if="models === null"
       class="flex justify-center"
@@ -20,7 +20,7 @@
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/delete/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -35,7 +35,7 @@
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/delete/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -50,7 +50,7 @@
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/delete/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -63,8 +63,9 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
-import { onBeforeMount, onMounted, ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { onMounted, ref } from "vue";
+import { onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 const userStore = useUserStore();

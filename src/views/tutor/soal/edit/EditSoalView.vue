@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-slate-50 min-h-screen pt-3 font-primary">
+  <main class="min-h-screen bg-slate-50 pt-3 font-primary">
     <div
       v-if="models === null"
       class="flex justify-center"
@@ -15,12 +15,12 @@
     <div v-else>
       <!-- mobile start -->
       <section class="md:hidden flex flex-col items-center gap-y-6 px-8">
-        <h1 class="font-secondary font-medium text-2xl">Model</h1>
+        <h1 class="font-secondary font-medium text-2xl">Edit Soal</h1>
         <RouterLink
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/edit/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -30,12 +30,14 @@
       <section
         class="hidden xl:hidden md:grid grid-cols-4 justify-items-center gap-y-6 gap-x-4 px-8"
       >
-        <h1 class="font-secondary font-medium text-2xl col-span-4">Model</h1>
+        <h1 class="font-secondary font-medium text-2xl col-span-4">
+          Edit Soal
+        </h1>
         <RouterLink
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/edit/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -45,12 +47,14 @@
       <section
         class="hidden xl:grid grid-cols-4 justify-items-center gap-y-6 gap-x-4 px-8"
       >
-        <h1 class="font-secondary font-medium text-2xl col-span-4">Model</h1>
+        <h1 class="font-secondary font-medium text-2xl col-span-4">
+          Edit Soal
+        </h1>
         <RouterLink
           v-for="(item, index) in models"
           :key="index"
           class="bg-primary w-full text-center py-6 rounded-lg cursor-pointer border border-primary transition-all hover:bg-white hover:text-primary"
-          :to="`/tutor/soal/${item.namaModel}/${item.id}`"
+          :to="`/tutor/soal/edit/${item.namaModel}/${item.id}`"
         >
           {{ item.namaModel }}
         </RouterLink>
@@ -64,7 +68,7 @@
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
 import { onBeforeMount, onMounted, ref } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 const userStore = useUserStore();
