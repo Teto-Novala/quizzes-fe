@@ -19,6 +19,13 @@ import EditSoalModelView from "@/views/tutor/soal/edit/model/EditSoalModelView.v
 import IdEditSoalView from "@/views/tutor/soal/edit/id/IdEditSoalView.vue";
 import DeleteSoalView from "@/views/tutor/soal/delete/DeleteSoalView.vue";
 import DeleteSoalModelView from "@/views/tutor/soal/delete/model/DeleteSoalModelView.vue";
+import AdminDashboardView from "@/views/admin/AdminDashboardView.vue";
+import DeleteSubjectView from "@/views/admin/subject/delete/DeleteSubjectView.vue";
+import UpdateSubjectView from "@/views/admin/subject/update/UpdateSubjectView.vue";
+import CreateSubjectView from "@/views/admin/subject/create/CreateSubjectView.vue";
+import SubjectView from "@/views/admin/subject/read/SubjectView.vue";
+import UserView from "@/views/admin/user/read/UserView.vue";
+import UpdateUserView from "@/views/admin/user/update/UpdateUserView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -141,6 +148,60 @@ const router = createRouter({
       path: "/tutor/soal/delete/:namaModel/:idModel",
       name: "tutor-soal-delete-namaModel-idModel",
       component: DeleteSoalModelView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/dashboard",
+      name: "admin-dashboard",
+      component: AdminDashboardView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/subject",
+      name: "admin-subject",
+      component: SubjectView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/subject/create",
+      name: "admin-subject-create",
+      component: CreateSubjectView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/subject/edit",
+      name: "admin-subject-edit",
+      component: UpdateSubjectView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/subject/delete",
+      name: "admin-subject-delete",
+      component: DeleteSubjectView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/user",
+      name: "admin-user",
+      component: UserView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/user/edit",
+      name: "admin-user-edit",
+      component: UpdateUserView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/profil",
+      name: "admin-profil",
+      component: ProfilView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/profil/edit",
+      name: "admin-profil-edit",
+      component: EditProfilView,
       meta: { requiresNav: true, requiresSideBar: true },
     },
   ],

@@ -226,7 +226,7 @@ const submitHandler = async () => {
           } else if (userStore.data.user.role === "user") {
             router.push("/");
           } else {
-            router.push("/");
+            router.push("/admin/dashboard");
           }
         },
       });

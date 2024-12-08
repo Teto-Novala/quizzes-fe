@@ -41,6 +41,91 @@
         >Home</RouterLink
       >
       <div
+        v-if="isAdmin"
+        class="flex flex-col gap-y-4 w-full"
+      >
+        <div
+          @click="subjectHandler"
+          class="hover:bg-white w-full text-center py-1 flex items-center justify-center gap-x-4"
+        >
+          <p>Subject</p>
+          <img
+            :src="`/src/assets/images/${isSubjectShow ? 'down' : 'up'}.svg`"
+            alt="svg"
+            class="w-3"
+          />
+        </div>
+        <div
+          v-if="isSubjectShow"
+          class="flex flex-col gap-y-4 w-full"
+        >
+          <RouterLink
+            to="/admin/subject"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemSubjectHandler"
+            >Lihat Subject</RouterLink
+          >
+          <RouterLink
+            to="/admin/subject/create"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemSubjectHandler"
+            >Buat Subject</RouterLink
+          >
+          <RouterLink
+            to="/admin/subject/edit"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemSubjectHandler"
+            >Edit Subject</RouterLink
+          >
+          <RouterLink
+            to="/admin/subject/delete"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemSubjectHandler"
+            >Hapus Subject</RouterLink
+          >
+        </div>
+        <div
+          @click="userHandler"
+          class="hover:bg-white w-full text-center py-1 flex items-center justify-center gap-x-4"
+        >
+          <p>User</p>
+          <img
+            :src="`/src/assets/images/${isUserShow ? 'down' : 'up'}.svg`"
+            alt="svg"
+            class="w-3"
+          />
+        </div>
+        <div
+          v-if="isUserShow"
+          class="flex flex-col gap-y-4 w-full"
+        >
+          <RouterLink
+            to="/admin/user"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemUserHandler"
+            >Lihat User</RouterLink
+          >
+          <RouterLink
+            to="/admin/user/edit"
+            class="hover:bg-white w-full text-center py-1"
+            @click="itemSubjectHandler"
+            >Edit User</RouterLink
+          >
+        </div>
+        <RouterLink
+          @click="showHandler"
+          class="hover:bg-white w-full text-center py-1"
+          to="/admin/nilai-siswa"
+          >Nilai Siswa</RouterLink
+        >
+        <RouterLink
+          @click="showHandler"
+          class="hover:bg-white w-full text-center py-1"
+          to="/admin/profil"
+          >Profil</RouterLink
+        >
+      </div>
+      <div
         v-if="isTutor"
         class="flex flex-col gap-y-4 w-full"
       >
@@ -220,6 +305,14 @@
             Logout
           </div>
         </div>
+        <div v-else>
+          <div
+            @click="logOutHandler"
+            class="hover:text-secondary transition-all hover:underline"
+          >
+            Logout
+          </div>
+        </div>
       </div>
       <Button
         v-else
@@ -280,6 +373,14 @@
             <p>Logout</p>
           </div>
         </div>
+        <div v-else>
+          <div
+            @click="logOutHandler"
+            class="hover:text-secondary transition-all hover:underline cursor-pointer"
+          >
+            Logout
+          </div>
+        </div>
       </div>
       <Button
         v-else
@@ -307,6 +408,8 @@ const toast = useToast();
 const isShow = ref(false);
 const isSoalShow = ref(false);
 const isModelShow = ref(false);
+const isSubjectShow = ref(false);
+const isUserShow = ref(false);
 
 const hamburgerHandler = () => {
   isShow.value = !isShow.value;
@@ -337,6 +440,14 @@ const modelHandler = () => {
   isModelShow.value = !isModelShow.value;
 };
 
+const subjectHandler = () => {
+  isSubjectShow.value = !isSubjectShow.value;
+};
+
+const userHandler = () => {
+  isUserShow.value = !isUserShow.value;
+};
+
 const itemModelHandler = () => {
   modelHandler();
   showHandler();
@@ -347,6 +458,17 @@ const itemSoalHandler = () => {
   showHandler();
 };
 
+const itemSubjectHandler = () => {
+  subjectHandler();
+  showHandler();
+};
+
+const itemUserHandler = () => {
+  userHandler();
+  showHandler();
+};
+
 const isTutor = computed(() => userStore.data.user.role === "tutor");
 const isUser = computed(() => userStore.data.user.role === "user");
+const isAdmin = computed(() => userStore.data.user.role === "admin");
 </script>
