@@ -95,6 +95,15 @@ const fetchAPI = async () => {
     );
     models.value = response.data;
   } catch (error) {
+    if (error.response.data.message === "Unauthorized") {
+      toast.error(error.response.data.message, {
+        onClose: () => {
+          userStore.reset();
+          router.push("/login");
+        },
+      });
+      return;
+    }
     toast.error(error.response.data.message);
   }
 };
