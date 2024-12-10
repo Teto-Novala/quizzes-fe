@@ -337,11 +337,24 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
+import { onBeforeMount } from "vue";
 import { computed } from "vue";
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { useToast } from "vue-toastification";
 
 const userStore = useUserStore();
+const toast = useToast();
+
+onBeforeMount(() => {
+  if (!Object.keys(userStore.data).length) {
+    toast.error("Anda belum login", {
+      onClose: () => {
+        router.push("/login");
+      },
+    });
+  }
+});
 
 const isModelShow = ref(false);
 const isSoalShow = ref(false);

@@ -112,7 +112,9 @@
               disabled
               class="p-2 border border-primary"
             >
-              <option :value="soal.jawaban">A</option>
+              <option :value="soal.jawaban">
+                {{ soal.jawaban }}
+              </option>
             </select>
           </div>
         </div>
@@ -219,7 +221,9 @@
               disabled
               class="p-2 border border-primary"
             >
-              <option :value="soal.jawaban">A</option>
+              <option :value="soal.jawaban">
+                {{ soal.jawaban }}
+              </option>
             </select>
           </div>
         </div>

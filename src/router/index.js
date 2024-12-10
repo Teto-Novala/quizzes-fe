@@ -29,6 +29,8 @@ import UpdateUserView from "@/views/admin/user/update/UpdateUserView.vue";
 import IdSubjectView from "@/views/admin/subject/update/id/IdSubjectView.vue";
 import IdUpdateUserView from "@/views/admin/user/update/id/IdUpdateUserView.vue";
 import IdUserView from "@/views/admin/user/read/id/IdUserView.vue";
+import UserProfilView from "@/views/user/profil/UserProfilView.vue";
+import UserUpdateView from "@/views/user/profil/update/UserUpdateView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -224,6 +226,18 @@ const router = createRouter({
       name: "admin-profil-edit",
       component: EditProfilView,
       meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/profil",
+      name: "profil",
+      component: UserProfilView,
+      meta: { requiresNav: true, requiresSideBar: false },
+    },
+    {
+      path: "/profil/edit",
+      name: "profil-edit",
+      component: UserUpdateView,
+      meta: { requiresNav: true, requiresSideBar: false },
     },
   ],
 });
