@@ -41,7 +41,7 @@
         <!-- tablet end -->
         <!-- desktop start -->
         <section
-          class="hidden xl:grid grid-cols-3 justify-items-stretch gap-x-5 place-content-center px-8"
+          class="hidden xl:grid grid-cols-3 gap-y-4 justify-items-stretch gap-x-5 place-content-center px-8"
         >
           <div
             class="bg-primary p-3 text-center rounded-lg border border-primary transition-all hover:bg-white hover:text-primary"

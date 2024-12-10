@@ -324,7 +324,9 @@
               disabled
               class="p-2 border border-primary"
             >
-              <option :value="soal.jawaban">A</option>
+              <option :value="soal.jawaban">
+                {{ soal.jawaban }}
+              </option>
             </select>
           </div>
         </div>
@@ -370,6 +372,7 @@ const fetchAPI = async () => {
       }
     );
     soal.value = response.data;
+    soal.value.jawaban = soal.value.jawaban.toUpperCase();
   } catch (error) {
     if (error.response.data.message === "Unauthorized") {
       toast.error(error.response.data.message, {

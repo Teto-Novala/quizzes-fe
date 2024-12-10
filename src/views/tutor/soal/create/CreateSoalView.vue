@@ -489,6 +489,7 @@ const fetchAPI = async () => {
       }
     );
     models.value = response.data;
+    console.log(models.value);
   } catch (error) {
     if (error.response.data.message === "Unauthorized") {
       toast.error(error.response.data.message, {

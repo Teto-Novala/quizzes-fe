@@ -180,10 +180,14 @@ const submitHandler = async () => {
       );
       toast.success(response.data.message, {
         onClose: () => {
-          location.reload();
+          // location.reload();
+          // router.replace({ path: `/tutor/model/edit/${route.params.id}` });
+          router.go(0);
         },
       });
     } catch (error) {
+      console.log(error);
+
       if (error.response.data.message === "Unauthorized") {
         toast.error(error.response.data.message, {
           onClose: () => {

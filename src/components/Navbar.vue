@@ -335,12 +335,12 @@
         class="flex items-center justify-center gap-x-16"
       >
         <div v-if="isTutor">
-          <div
+          <!-- <div
             @click="logOutHandler"
             class="hover:text-secondary transition-all hover:underline cursor-pointer"
           >
             Logout
-          </div>
+          </div> -->
         </div>
         <div
           v-if="isUser"
