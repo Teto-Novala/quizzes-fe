@@ -26,9 +26,8 @@
           <thead class="bg-slate-300">
             <tr>
               <td class="border border-black p-1">No</td>
-              <td class="border border-black p-1">Username</td>
+              <td class="border border-black p-1">Nama lengkap</td>
               <td class="border border-black p-1">Email</td>
-              <td class="border border-black p-1">Subject</td>
               <td class="border border-black p-1">Role</td>
             </tr>
           </thead>
@@ -36,11 +35,12 @@
             <tr
               v-for="(item, index) in users"
               :key="index"
+              class="hover:bg-primary cursor-pointer transition-all"
+              @click="itemHandler(item.id)"
             >
               <td class="border border-black p-1">{{ index + 1 }}</td>
-              <td class="border border-black p-1">{{ item.username }}</td>
+              <td class="border border-black p-1">{{ item.namaLengkap }}</td>
               <td class="border border-black p-1">{{ item.email }}</td>
-              <td class="border border-black p-1">{{ item.subject }}</td>
               <td class="border border-black p-1">{{ item.role }}</td>
             </tr>
           </tbody>
@@ -95,6 +95,7 @@ const fetchAPI = async () => {
       },
     });
     users.value = response.data;
+    console.log(users);
   } catch (error) {
     if (error.response.data.message === "Unauthorized") {
       toast.error(error.response.data.message, {
@@ -112,6 +113,10 @@ const fetchAPI = async () => {
 onMounted(async () => {
   await fetchAPI();
 });
+
+const itemHandler = (id) => {
+  router.push(`/admin/user/${id}`);
+};
 
 const isAdmin = computed(() => userStore.data.user.role === "admin");
 </script>
