@@ -11,6 +11,18 @@
       >
         <div>
           <label
+            for="namaLengkap"
+            class="text-lg"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model:model="formUpdate.namaLengkap"
+          />
+        </div>
+        <div>
+          <label
             for="username"
             class="text-lg"
             >Username</label
@@ -23,6 +35,18 @@
         </div>
         <div>
           <label
+            for="noHp"
+            class="text-lg"
+            >No Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model:model="formUpdate.noHp"
+          />
+        </div>
+        <div>
+          <label
             for="email"
             class="text-lg"
             >Email</label
@@ -31,6 +55,18 @@
             v-model:model="formUpdate.email"
             type="email"
             id="email"
+          />
+        </div>
+        <div>
+          <label
+            for="address"
+            class="text-lg"
+            >Address</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model:model="formUpdate.address"
           />
         </div>
         <Button
@@ -52,6 +88,18 @@
       >
         <div>
           <label
+            for="namaLengkap"
+            class="text-lg"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model:model="formUpdate.namaLengkap"
+          />
+        </div>
+        <div>
+          <label
             for="username"
             class="text-lg"
             >Username</label
@@ -64,6 +112,18 @@
         </div>
         <div>
           <label
+            for="noHp"
+            class="text-lg"
+            >No Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model:model="formUpdate.noHp"
+          />
+        </div>
+        <div>
+          <label
             for="email"
             class="text-lg"
             >Email</label
@@ -72,6 +132,18 @@
             v-model:model="formUpdate.email"
             type="email"
             id="email"
+          />
+        </div>
+        <div>
+          <label
+            for="address"
+            class="text-lg"
+            >Address</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model:model="formUpdate.address"
           />
         </div>
         <Button
@@ -91,6 +163,18 @@
       >
         <div>
           <label
+            for="namaLengkap"
+            class="text-lg"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model:model="formUpdate.namaLengkap"
+          />
+        </div>
+        <div>
+          <label
             for="username"
             class="text-lg"
             >Username</label
@@ -103,6 +187,18 @@
         </div>
         <div>
           <label
+            for="noHp"
+            class="text-lg"
+            >No Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model:model="formUpdate.noHp"
+          />
+        </div>
+        <div>
+          <label
             for="email"
             class="text-lg"
             >Email</label
@@ -111,6 +207,18 @@
             v-model:model="formUpdate.email"
             type="email"
             id="email"
+          />
+        </div>
+        <div>
+          <label
+            for="address"
+            class="text-lg"
+            >Address</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model:model="formUpdate.address"
           />
         </div>
         <Button
@@ -181,16 +289,33 @@ onBeforeMount(() => {
 const isConfirm = ref(false);
 
 const formUpdate = reactive({
+  namaLengkap: Object.keys(userStore.data).length
+    ? userStore.data.user.namaLengkap
+    : "",
   username: Object.keys(userStore.data).length
     ? userStore.data.user.username
     : "",
+  noHp: Object.keys(userStore.data).length ? userStore.data.user.noHp : "",
   email: Object.keys(userStore.data).length ? userStore.data.user.email : "",
+  address: Object.keys(userStore.data).length
+    ? userStore.data.user.address
+    : "",
 });
 
 const password = ref("");
 
 const rules = computed(() => {
   return {
+    namaLengkap: {
+      required: helpers.withMessage(
+        "Nama Lengkap tidak boleh kosong",
+        required
+      ),
+      minLength: helpers.withMessage(
+        "Nama Lengkap minimal 3 karakter",
+        minLength(3)
+      ),
+    },
     username: {
       required: helpers.withMessage("Username tidak boleh kosong", required),
       minLength: helpers.withMessage(
@@ -198,9 +323,16 @@ const rules = computed(() => {
         minLength(3)
       ),
     },
+    noHp: {
+      required: helpers.withMessage("No Hp tidak boleh kosong", required),
+      minLength: helpers.withMessage("No Hp minimal 11 angka", minLength(11)),
+    },
     email: {
       required: helpers.withMessage("Email tidak boleh kosong", required),
       email: helpers.withMessage("Bukan format email", email),
+    },
+    address: {
+      required: helpers.withMessage("Alamat tidak boleh kosong", required),
     },
   };
 });
@@ -209,13 +341,19 @@ const v$ = useVuelidate(rules, formUpdate);
 
 const submitHandler = async () => {
   const payload = {
+    namaLengkap: formUpdate.namaLengkap,
     username: formUpdate.username,
+    noHp: formUpdate.noHp,
     email: formUpdate.email,
+    address: formUpdate.address,
   };
 
   const isSame =
     payload.username === userStore.data.user.username &&
-    payload.email === userStore.data.user.email;
+    payload.email === userStore.data.user.email &&
+    payload.address === userStore.data.user.address &&
+    payload.namaLengkap === userStore.data.user.namaLengkap &&
+    payload.noHp === userStore.data.user.noHp;
 
   if (isSame) {
     return;
@@ -233,8 +371,6 @@ const submitHandler = async () => {
 const kembaliHandler = () => {
   isConfirm.value = false;
   password.value = "";
-  formDelete.email = "";
-  formDelete.password = "";
   location.reload();
 };
 

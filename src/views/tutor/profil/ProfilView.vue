@@ -2,9 +2,17 @@
   <main class="bg-slate-50">
     <!-- mobile start -->
     <section
-      class="md:hidden flex flex-col gap-y-4 items-center font-primary px-8 pt-3"
+      class="md:hidden flex flex-col gap-y-4 items-center font-primary px-8 pt-3 pb-14"
     >
       <h1 class="font-secondary font-medium text-2xl mx-auto">Profil</h1>
+      <div class="w-full">
+        <label class="text-lg">Nama Lengkap</label>
+        <Input
+          type="text"
+          v-model:model="formData.namaLengkap"
+          disabled
+        />
+      </div>
       <div class="w-full">
         <label
           for="username"
@@ -19,6 +27,14 @@
         />
       </div>
       <div class="w-full">
+        <label class="text-lg">No Hp (Whatsapp)</label>
+        <Input
+          type="text"
+          v-model:model="formData.noHp"
+          disabled
+        />
+      </div>
+      <div class="w-full">
         <label
           for="email"
           class="text-lg"
@@ -28,6 +44,14 @@
           type="email"
           id="email"
           v-model:model="formData.email"
+          disabled
+        />
+      </div>
+      <div class="w-full">
+        <label class="text-lg">Alamat</label>
+        <Input
+          type="text"
+          v-model:model="formData.address"
           disabled
         />
       </div>
@@ -56,6 +80,14 @@
         Profil
       </h1>
       <div class="w-full col-span-3">
+        <label class="text-lg">Nama Lengkap</label>
+        <Input
+          type="text"
+          v-model:model="formData.namaLengkap"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
         <label
           for="username"
           class="text-lg"
@@ -69,6 +101,14 @@
         />
       </div>
       <div class="w-full col-span-3">
+        <label class="text-lg">No Hp (Whatsapp)</label>
+        <Input
+          type="text"
+          v-model:model="formData.noHp"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
         <label
           for="email"
           class="text-lg"
@@ -78,6 +118,14 @@
           type="email"
           id="email"
           v-model:model="formData.email"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
+        <label class="text-lg">Alamat</label>
+        <Input
+          type="text"
+          v-model:model="formData.address"
           disabled
         />
       </div>
@@ -106,6 +154,14 @@
         Profil
       </h1>
       <div class="w-full col-span-3">
+        <label class="text-lg">Nama Lengkap</label>
+        <Input
+          type="text"
+          v-model:model="formData.namaLengkap"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
         <label
           for="username"
           class="text-lg"
@@ -119,6 +175,14 @@
         />
       </div>
       <div class="w-full col-span-3">
+        <label class="text-lg">No Hp (Whatsapp)</label>
+        <Input
+          type="text"
+          v-model:model="formData.noHp"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
         <label
           for="email"
           class="text-lg"
@@ -128,6 +192,14 @@
           type="email"
           id="email"
           v-model:model="formData.email"
+          disabled
+        />
+      </div>
+      <div class="w-full col-span-3">
+        <label class="text-lg">Alamat</label>
+        <Input
+          type="text"
+          v-model:model="formData.address"
           disabled
         />
       </div>
@@ -222,8 +294,12 @@ onBeforeMount(() => {
 const isDelete = ref(false);
 
 const formData = reactive({
+  namaLengkap: userStore.data.user.namaLengkap,
   username: userStore.data.user.username,
+  noHp: userStore.data.user.noHp,
   email: userStore.data.user.email,
+  address: userStore.data.user.address,
+  subject: userStore.data.user.subject,
 });
 
 const formDelete = reactive({
