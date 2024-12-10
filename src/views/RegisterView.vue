@@ -18,6 +18,18 @@
         <div>
           <label
             class="text-lg"
+            for="namaLengkap"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model="formData.namaLengkap"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
             for="username"
             >Username</label
           >
@@ -30,6 +42,18 @@
         <div>
           <label
             class="text-lg"
+            for="noHp"
+            >No. Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model="formData.noHp"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
             for="email"
             >Email</label
           >
@@ -37,6 +61,18 @@
             type="email"
             id="email"
             v-model="formData.email"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
+            for="address"
+            >Alamat</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model="formData.address"
           />
         </div>
         <div>
@@ -90,6 +126,18 @@
         <div>
           <label
             class="text-lg"
+            for="namaLengkap"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model="formData.namaLengkap"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
             for="username"
             >Username</label
           >
@@ -102,6 +150,18 @@
         <div>
           <label
             class="text-lg"
+            for="noHp"
+            >No. Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model="formData.noHp"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
             for="email"
             >Email</label
           >
@@ -109,6 +169,18 @@
             type="email"
             id="email"
             v-model="formData.email"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
+            for="address"
+            >Alamat</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model="formData.address"
           />
         </div>
         <div>
@@ -150,11 +222,23 @@
     >
       <form
         @submit.prevent="submitHandler"
-        class="flex flex-col gap-y-3 justify-center font-secondary"
+        class="grid grid-cols-2 font-secondary gap-y-4 gap-x-3"
       >
-        <div class="text-center text-secondary flex flex-col gap-y-2">
+        <div class="text-center order-first col-span-2 text-secondary">
           <h1 class="text-2xl">Selamat Datang</h1>
           <p class="text-lg">Silahkan membuat akun</p>
+        </div>
+        <div>
+          <label
+            class="text-lg"
+            for="namaLengkap"
+            >Nama Lengkap</label
+          >
+          <Input
+            type="text"
+            id="namaLengkap"
+            v-model="formData.namaLengkap"
+          />
         </div>
         <div>
           <label
@@ -166,6 +250,18 @@
             type="text"
             id="username"
             v-model="formData.username"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
+            for="noHp"
+            >No. Hp (Whatsapp)</label
+          >
+          <Input
+            type="text"
+            id="noHp"
+            v-model="formData.noHp"
           />
         </div>
         <div>
@@ -183,6 +279,18 @@
         <div>
           <label
             class="text-lg"
+            for="address"
+            >Alamat</label
+          >
+          <Input
+            type="text"
+            id="address"
+            v-model="formData.address"
+          />
+        </div>
+        <div>
+          <label
+            class="text-lg"
             for="password"
             >Password</label
           >
@@ -192,6 +300,7 @@
             v-model="formData.password"
           />
         </div>
+        <div></div>
         <div>
           <label
             class="text-lg"
@@ -204,10 +313,14 @@
             v-model="formData.konfirmasiPassword"
           />
         </div>
-        <Button type="submit">Register</Button>
+        <Button
+          class="col-span-2"
+          type="submit"
+          >Register</Button
+        >
         <RouterLink
           to="/login"
-          class="underline text-secondary transition-all hover:text-current text-right"
+          class="underline col-span-2 order-last text-secondary transition-all hover:text-current text-right"
           >Sudah punya akun?</RouterLink
         >
       </form>
@@ -241,14 +354,27 @@ const toast = useToast();
 const router = useRouter();
 
 const formData = reactive({
+  namaLengkap: "",
   username: "",
+  noHp: "",
   email: "",
+  address: "",
   password: "",
   konfirmasiPassword: "",
 });
 
 const rules = computed(() => {
   return {
+    namaLengkap: {
+      required: helpers.withMessage(
+        "Nama Lengkap tidak boleh kosong",
+        required
+      ),
+      minLength: helpers.withMessage(
+        "Nama Lengkap minimal 3 karakter",
+        minLength(3)
+      ),
+    },
     username: {
       required: helpers.withMessage("Username tidak boleh kosong", required),
       minLength: helpers.withMessage(
@@ -256,9 +382,16 @@ const rules = computed(() => {
         minLength(3)
       ),
     },
+    noHp: {
+      required: helpers.withMessage("No HP tidak boleh kosong", required),
+      minLength: helpers.withMessage("No HP minimal 3 karakter", minLength(11)),
+    },
     email: {
       required: helpers.withMessage("Email tidak boleh kosong", required),
       email: helpers.withMessage("Bukan format email", email),
+    },
+    address: {
+      required: helpers.withMessage("Alamat tidak boleh kosong", required),
     },
     password: {
       required: helpers.withMessage("Password tidak boleh kosong", required),
@@ -285,8 +418,11 @@ const submitHandler = async () => {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
         {
+          namaLengkap: formData.namaLengkap,
           username: formData.username,
+          noHp: formData.noHp,
           email: formData.email,
+          address: formData.address,
           password: formData.password,
         }
       );
