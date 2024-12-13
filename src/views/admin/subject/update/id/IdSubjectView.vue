@@ -148,7 +148,7 @@ const submitHandler = async () => {
       );
       toast.success(response.data.message, {
         onClose: () => {
-          location.reload();
+          router.go(0);
         },
       });
     } catch (error) {

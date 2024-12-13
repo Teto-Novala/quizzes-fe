@@ -177,7 +177,9 @@ onMounted(async () => {
     updateForm.role = user.value.role;
     updateForm.subject = user.value.subject;
   });
-  await fetchSubject();
+  if (subjects.value === null) {
+    await fetchSubject();
+  }
 });
 
 const updateForm = reactive({
@@ -209,7 +211,7 @@ const submitHandler = async () => {
 
     toast.success(response.data.message, {
       onClose: () => {
-        location.reload();
+        router.go(0);
       },
     });
   } catch (error) {

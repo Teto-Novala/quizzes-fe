@@ -469,7 +469,7 @@ const submitHandler = async () => {
       );
       toast.success("Berhasil mengupdate", {
         onClose: () => {
-          location.reload();
+          router.go(0);
         },
       });
     } catch (error) {

@@ -155,7 +155,7 @@
         >
       </div>
       <RouterLink
-        to="/tutor/nilai-siswa"
+        to="/admin/nilai-siswa"
         class="hover:bg-white w-full block py-2 cursor-pointer transition-all"
         >Nilai Siswa</RouterLink
       >
@@ -337,7 +337,7 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, onMounted } from "vue";
 import { computed } from "vue";
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
@@ -376,6 +376,21 @@ const userHandler = () => {
   isUserShow.value = !isUserShow.value;
 };
 
-const isTutor = computed(() => userStore.data.user.role === "tutor");
-const isAdmin = computed(() => userStore.data.user.role === "admin");
+// const isTutor = computed(() => userStore.data.user.role === "tutor");
+// const isAdmin = computed(() => userStore.data.user.role === "admin");
+
+const isTutor = ref(false);
+const isAdmin = ref(false);
+
+onMounted(() => {
+  if (userStore.data) {
+    console.log("masuk");
+
+    isTutor.value = userStore.data.user.role === "tutor" ? true : false;
+    isAdmin.value = userStore.data.user.role === "admin" ? true : false;
+
+    console.log(isTutor.value);
+    console.log(isAdmin.value);
+  }
+});
 </script>

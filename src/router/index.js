@@ -32,6 +32,13 @@ import IdUserView from "@/views/admin/user/read/id/IdUserView.vue";
 import UserProfilView from "@/views/user/profil/UserProfilView.vue";
 import UserUpdateView from "@/views/user/profil/update/UserUpdateView.vue";
 import UjianView from "@/views/user/ujian/UjianView.vue";
+import IdUjianView from "@/views/user/ujian/id/IdUjianView.vue";
+import UjianFinishView from "@/views/user/ujian/finish/UjianFinishView.vue";
+import NilaiSiswaView from "@/views/admin/nilai-siswa/NilaiSiswaView.vue";
+import NilaiSiswaSubjectView from "@/views/admin/nilai-siswa/subject/NilaiSiswaSubjectView.vue";
+import TutorNilaiSiswaView from "@/views/tutor/nilai-siswa/TutorNilaiSiswaView.vue";
+import UserNilaiSiswaView from "@/views/user/nilai-siswa/UserNilaiSiswaView.vue";
+import UserNIlaiSubjectView from "@/views/user/nilai-siswa/subject/UserNIlaiSubjectView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -244,6 +251,48 @@ const router = createRouter({
       path: "/ujian",
       name: "ujian",
       component: UjianView,
+      meta: { requiresNav: true, requiresSideBar: false },
+    },
+    {
+      path: "/ujian/:namaSubject",
+      name: "ujian-namaSubject",
+      component: IdUjianView,
+      meta: { requiresNav: true, requiresSideBar: false },
+    },
+    {
+      path: "/ujian/:namaSubject/finish/:idFinish",
+      name: "ujian-namaSubject-finish-idFinish",
+      component: UjianFinishView,
+      meta: { requiresNav: true, requiresSideBar: false },
+    },
+    {
+      path: "/admin/nilai-siswa",
+      name: "admin-nilai-siswa",
+      component: NilaiSiswaView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/admin/nilai-siswa/:nama",
+      name: "admin-nilai-siswa-nama",
+      component: NilaiSiswaSubjectView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/tutor/nilai-siswa",
+      name: "tutor-nilai-siswa",
+      component: TutorNilaiSiswaView,
+      meta: { requiresNav: true, requiresSideBar: true },
+    },
+    {
+      path: "/histori",
+      name: "histori",
+      component: UserNilaiSiswaView,
+      meta: { requiresNav: true, requiresSideBar: false },
+    },
+    {
+      path: "/histori/:nama",
+      name: "histori-nama",
+      component: UserNIlaiSubjectView,
       meta: { requiresNav: true, requiresSideBar: false },
     },
   ],

@@ -137,6 +137,7 @@ const submitHandler = async () => {
         "http://localhost:5000/api/soal-model/create",
         {
           namaModel: formData.namaModel,
+          subject: userStore.data.user.subject,
         },
         {
           headers: {

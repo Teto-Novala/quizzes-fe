@@ -13,7 +13,7 @@
         <p class="text-slate-500 text-lg">
           Kami membantu anda mempersiapkan Test
         </p>
-        <Button>Mulai Test</Button>
+        <Button @click="mulaiHandler">Mulai Test</Button>
       </div>
     </section>
     <!-- mobile end -->
@@ -28,7 +28,7 @@
         <p class="text-slate-500 text-lg">
           Kami membantu anda mempersiapkan Test
         </p>
-        <Button>Mulai Test</Button>
+        <Button @click="mulaiHandler">Mulai Test</Button>
       </div>
       <img
         src="/src/assets/images/home/hero.svg"
@@ -46,7 +46,7 @@
         <p class="text-slate-500 text-xl">
           Kami membantu anda mempersiapkan Test
         </p>
-        <Button>Mulai Test</Button>
+        <Button @click="mulaiHandler">Mulai Test</Button>
       </div>
       <img
         src="/src/assets/images/home/hero.svg"
@@ -59,4 +59,28 @@
 </template>
 <script setup>
 import Button from "@/components/Button.vue";
+import { useUserStore } from "@/stores/user";
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const router = useRouter();
+
+const mulaiHandler = () => {
+  if (!Object.keys(userStore.data).length) {
+    router.push("/login");
+  }
+
+  if (Object.keys(userStore.data).length) {
+    if (userStore.data.user.role === "tutor") {
+      router.push("/tutor/dashboard");
+    }
+    if (userStore.data.user.role === "admin") {
+      router.push("/admin/dashboard");
+    }
+    if (userStore.data.user.role === "user") {
+      router.push("/ujian");
+    }
+  }
+};
 </script>

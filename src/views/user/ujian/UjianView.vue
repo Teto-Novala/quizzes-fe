@@ -39,7 +39,11 @@
               class="w-full"
               >Kembali</Button
             >
-            <Button class="w-full">Mulai</Button>
+            <Button
+              @click="mulaiHandler"
+              class="w-full"
+              >Mulai</Button
+            >
           </div>
         </div>
       </div>
@@ -128,5 +132,9 @@ const kembaliHandler = () => {
   infoForm.time = "";
   soalStore.reset();
   isClicked.value = false;
+};
+
+const mulaiHandler = () => {
+  router.push(`/ujian/${soalStore.data.subject}`);
 };
 </script>
