@@ -33,11 +33,16 @@
               </div>
             </div>
             <h1 class="text-center my-5 text-2xl">Seluruh Nilai</h1>
+            <div
+              @click="downloadHandler"
+              class="w-full flex justify-end mb-3"
+            >
+              <Button>Download</Button>
+            </div>
             <table class="w-full text-center">
               <thead>
                 <tr>
                   <td class="border border-black bg-slate-100 p-1">No</td>
-                  <td class="border border-black bg-slate-100 p-1">Nama</td>
                   <td class="border border-black bg-slate-100 p-1">Subject</td>
                   <td class="border border-black bg-slate-100 p-1">Benar</td>
                   <td class="border border-black bg-slate-100 p-1">Salah</td>
@@ -51,9 +56,6 @@
                 >
                   <td class="border border-black p-1">
                     {{ index + 1 }}
-                  </td>
-                  <td class="border border-black p-1">
-                    {{ item.namaUser }}
                   </td>
                   <td class="border border-black p-1">
                     {{ item.subject }}
@@ -78,6 +80,7 @@
 </template>
 
 <script setup>
+import Button from "@/components/Button.vue";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
 import { onBeforeMount, onMounted, ref } from "vue";
@@ -160,5 +163,29 @@ onMounted(async () => {
 
 const itemsSubjectHanlder = (nama) => {
   router.push(`/histori/${nama}`);
+};
+
+const downloadHandler = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/report/user/${userStore.data.user.id}`,
+      {
+        responseType: "blob",
+      }
+    );
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute(
+      "download",
+      `laporan_nilai_${userStore.data.user.namaLengkap}.pdf`
+    );
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    toast.error("Gagal Mendownload");
+  }
 };
 </script>

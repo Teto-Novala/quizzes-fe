@@ -12,8 +12,11 @@
       </div>
       <div
         v-else
-        class="px-8 flex justify-center"
+        class="px-8 flex flex-col items-center"
       >
+        <div class="mb-3 flex w-full justify-end">
+          <Button @click="downloadHandler">Download</Button>
+        </div>
         <table class="w-full text-center">
           <thead>
             <tr>
@@ -57,6 +60,7 @@
 </template>
 
 <script setup>
+import Button from "@/components/Button.vue";
 import { useUserStore } from "@/stores/user";
 import axios from "axios";
 import { onBeforeMount, onMounted, ref } from "vue";
@@ -109,4 +113,30 @@ onMounted(async () => {
     await fetchAPI();
   }
 });
+
+const downloadHandler = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/api/report/subject/${userStore.data.user.subject}`,
+      {
+        responseType: "blob",
+      }
+    );
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute(
+      "download",
+      `laporan_nilai_${userStore.data.user.subject}.pdf`
+    );
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.log(error);
+
+    toast.error("Gagal Mendownload");
+  }
+};
 </script>
